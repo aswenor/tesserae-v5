@@ -10,8 +10,11 @@ class TextOptions:
         The text to include in the match
     unit_type : {'line', 'phrase'}
         The divisions of the text to use
+    division : tesserae.db.entities.Text.divisions
+        The subsection of the text to use
     """
 
-    def __init__(self, text, unit_type):
+    def __init__(self, text, unit_type, division):
         self.text = text
         self.unit_type = unit_type
+        self.division = division

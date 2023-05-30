@@ -77,6 +77,17 @@ def _run_search(connection, results_status, matcher_type, search_params):
         stepsize = 5000
         source = search_params['source'].text
         target = search_params['target'].text
+        
+        ### Added code for dividing full text into subsections using specified divisions
+        source_division = search_params['source'].division
+        target_division = search_params['target'].division
+        
+        # If a division of the text is specified, then only search the given subsection of text
+        if source_division != 0: 
+          source = source_division
+        if target_division != 0:
+          target = target_division 
+        
         max_score = matches[0].score
         with ResultsWriter(results_status, source, target,
                            max_score) as writer:

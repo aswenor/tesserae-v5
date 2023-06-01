@@ -40,11 +40,13 @@ class SparseMatrixSearch(object):
         return {
             'source': {
                 'object_id': str(search_params['source'].text.id),
-                'units': search_params['source'].unit_type
+                'units': search_params['source'].unit_type,
+                'division': search_params['source'].division
             },
             'target': {
                 'object_id': str(search_params['target'].text.id),
-                'units': search_params['target'].unit_type
+                'units': search_params['target'].unit_type,
+                'division': search_params['target'].division
             },
             'method': {
                 'name': SparseMatrixSearch.matcher_type,
@@ -81,10 +83,14 @@ class SparseMatrixSearch(object):
             str(source['object_id']),
             'parameters.source.units':
             source['units'],
+            'parameters.source.division':
+            source['division'],
             'parameters.target.object_id':
             str(target['object_id']),
             'parameters.target.units':
             target['units'],
+            'parameters.target.division':
+            target['division'],
             'parameters.method.name':
             method['name'],
             'parameters.method.feature':
@@ -171,6 +177,8 @@ class SparseMatrixSearch(object):
         -------
         list of tesserae.db.entities.Match
         """
+        
+        ### TODO: Need to change these texts to be the subsections of text specified by divisions
         texts = [source.text, target.text]
         if isinstance(stopwords, int):
             stopword_basis = stopword_basis if stopword_basis != 'texts' \

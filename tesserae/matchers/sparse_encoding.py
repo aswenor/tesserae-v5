@@ -179,7 +179,8 @@ class SparseMatrixSearch(object):
         """
         
         ### TODO: Need to change these texts to be the subsections of text specified by divisions
-        texts = [source.text, target.text]
+        #texts = [source.text, target.text]
+        texts = [source.division, target.division]
         if isinstance(stopwords, int):
             stopword_basis = stopword_basis if stopword_basis != 'texts' \
                     else texts

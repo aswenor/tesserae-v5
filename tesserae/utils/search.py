@@ -80,6 +80,9 @@ def _run_search(connection, results_status, matcher_type, search_params):
         max_score = matches[0].score
         with ResultsWriter(results_status, source, target,
                            max_score) as writer:
+            # Add an additional stage for debugging purposes
+            results_status.add_new_stage('testing')
+            connection.update(results_status)
             for start in range(0, len(matches), stepsize):
                 results_status.update_current_stage_value(start / len(matches))
                 cur_slice = matches[start:start + stepsize]

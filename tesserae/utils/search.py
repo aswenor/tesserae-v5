@@ -78,17 +78,14 @@ def _run_search(connection, results_status, matcher_type, search_params):
         source = search_params['source'].text
         target = search_params['target'].text
         max_score = matches[0].score
-        with ResultsWriter(results_status, source, target,
+        '''with ResultsWriter(results_status, source, target,
                            max_score) as writer:
-            # Add an additional stage for debugging purposes
-            results_status.add_new_stage('testing')
-            connection.update(results_status)
             for start in range(0, len(matches), stepsize):
                 results_status.update_current_stage_value(start / len(matches))
                 cur_slice = matches[start:start + stepsize]
                 writer.record_matches(cur_slice)
                 connection.update(results_status)
-                connection.insert_nocheck(cur_slice)
+                connection.insert_nocheck(cur_slice)'''
 
         results_status.update_current_stage_value(1.0)
         results_status.status = Search.DONE
